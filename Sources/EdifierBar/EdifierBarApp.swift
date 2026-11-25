@@ -116,15 +116,31 @@ struct PanelView: View {
                 Text(speaker.volume.map(String.init) ?? "–").monospacedDigit().foregroundStyle(.secondary)
             }
             HStack {
-                Image(systemName: "speaker.fill").foregroundStyle(.secondary)
+                volumeStepButton(-1, icon: "speaker.fill", tip: t("Volume down", "Halkítás"))
                 Slider(value: Binding(
                     get: { Double(speaker.volume ?? 0) },
                     set: { speaker.setVolume(Int($0.rounded())) }
                 ), in: 0...Double(speaker.maxVolume), step: 1)
-                Image(systemName: "speaker.wave.3.fill").foregroundStyle(.secondary)
+                volumeStepButton(+1, icon: "speaker.wave.3.fill", tip: t("Volume up", "Hangosítás"))
             }
             .disabled(speaker.volume == nil)
         }
+    }
+
+    /// One step down/up; holding the button repeats.
+    private func volumeStepButton(_ delta: Int, icon: String, tip: String) -> some View {
+        let current = speaker.volume ?? 0
+        let target = min(max(current + delta, 0), speaker.maxVolume)
+        return Button {
+            guard let v = speaker.volume else { return }
+            speaker.setVolume(min(max(v + delta, 0), speaker.maxVolume))
+        } label: {
+            Image(systemName: icon).frame(width: 18, height: 18).contentShape(Rectangle())
+        }
+        .buttonStyle(.borderless)
+        .buttonRepeatBehavior(.enabled)
+        .disabled(target == current)
+        .help(tip)
     }
 
     @ViewBuilder

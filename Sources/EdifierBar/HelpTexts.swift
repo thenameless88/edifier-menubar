@@ -4,8 +4,8 @@ import SwiftUI
 /// screens and the observed behaviour, in our own words.
 enum Help {
     static let volume = Text2(
-        "Master volume of the speakers (0–30). It is the same setting as the volume knob on the active speaker, so turning the knob also moves this slider.",
-        "A hangfalak fő hangereje (0–30). Ugyanaz, mint az aktív hangfal hangerőgombja: ha a gombot tekered, ez a csúszka is követi.")
+        "Master volume of the speakers (0–30). It is the same setting as the volume knob on the active speaker, so turning the knob also moves this slider. Click the speaker icons at either end to step down or up by one (hold to repeat).",
+        "A hangfalak fő hangereje (0–30). Ugyanaz, mint az aktív hangfal hangerőgombja: ha a gombot tekered, ez a csúszka is követi. A két végén lévő hangszóró ikonnal egyesével halkíthatsz vagy hangosíthatsz (nyomva tartva ismétel).")
 
     static let soundMode = Text2(
         "Monitor: relatively flat response, close to the original recording, for mixing and critical listening.\nMusic: balanced highs, mids and lows for everyday listening (classical, light music, etc.).\nCustom: your own 9-band EQ curve on top of Monitor or Music, edited right here below.",
